@@ -22,20 +22,6 @@ body {
   align-items: center;
 }
 
-.taskNumber {
-  color: #999;
-  border: 1px solid #999;
-  border-radius: 50%;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  text-align: center;
-  font-size: 14px;
-  margin-right: 8px;
-  align-items: center;
-  justify-content: center;
-}
-
 .taskBg .taskText {
   flex: 1;
 }
@@ -58,11 +44,16 @@ body {
   display: inline-block;
   margin: 0px 10px 0 10px;
   cursor: pointer;
-  color: #00ff89;
+  color: aliceblue;
 }
 
 .taskBg .iconsWrap span:hover {
   color: lightcoral;
+  font-size: 23px
+}
+
+.taskBg .iconsWrap span:active {
+  font-size: 22px
 }
 
 .mr-20 {
