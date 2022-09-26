@@ -1,4 +1,3 @@
-
 variable "function_name" {
   default = "parking-lot-function"
 }
