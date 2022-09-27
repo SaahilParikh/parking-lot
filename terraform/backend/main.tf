@@ -151,6 +151,13 @@ resource "aws_acm_certificate" "saahil_io_certificate" {
 resource "aws_route53_zone" "saahil_io_hosted_zone" {
   comment = "HostedZone created by Route53 Registrar for parking-lot"
   name    = var.domain_name
+  tags         = {
+      "Type" = "Both"
+  }
+  tags_all     = {
+      "Project" = "parking-lot"
+      "Type"    = "Both"
+  }
 }
 
 resource "aws_route53_record" "saahil_io_api_gw_record" {
