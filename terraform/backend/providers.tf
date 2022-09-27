@@ -13,7 +13,7 @@ provider "aws" {
   default_tags {
     tags = {
       Project = "parking-lot"
-      Parking = "parking-lot backend"
+      Type = "backend"
     }
   }
 }

@@ -148,15 +148,6 @@ resource "aws_acm_certificate" "saahil_io_certificate" {
     create_before_destroy = true
   }
 }
-resource "aws_apigatewayv2_domain_name" "api_saahil_io_api_gateway_domain_name" {
-  domain_name = var.api_domain_name
-  domain_name_configuration {
-    certificate_arn = aws_acm_certificate.saahil_io_certificate.arn
-    endpoint_type   = "REGIONAL"
-    security_policy = "TLS_1_2"
-  }
-}
-
 resource "aws_route53_zone" "saahil_io_hosted_zone" {
   comment = "HostedZone created by Route53 Registrar for parking-lot"
   name    = var.domain_name
@@ -170,6 +161,15 @@ resource "aws_route53_record" "saahil_io_api_gw_record" {
     evaluate_target_health = true
     name                   = aws_apigatewayv2_domain_name.api_saahil_io_api_gateway_domain_name.domain_name_configuration[0].target_domain_name
     zone_id                = aws_apigatewayv2_domain_name.api_saahil_io_api_gateway_domain_name.domain_name_configuration[0].hosted_zone_id
+  }
+}
+
+resource "aws_apigatewayv2_domain_name" "api_saahil_io_api_gateway_domain_name" {
+  domain_name = var.api_domain_name
+  domain_name_configuration {
+    certificate_arn = aws_acm_certificate.saahil_io_certificate.arn
+    endpoint_type   = "REGIONAL"
+    security_policy = "TLS_1_2"
   }
 }
 

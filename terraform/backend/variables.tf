@@ -21,3 +21,7 @@ variable "domain_name" {
 variable "api_domain_name" {
   default = "api.saahil.io"
 }
+
+variable "www_domain_name" {
+  default = "www.saahil.io"
+}
