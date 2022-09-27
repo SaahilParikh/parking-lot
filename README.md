@@ -30,11 +30,11 @@
 <br />
 <div align="center">
   <a href="https://github.com/SaahilParikh/parking-lot">
-    <h2 href="https://saahil.io">Parking Lot</h2>
-    <h3 align-"center" href="https://saahil.io">Try it out at [Saahil.io](https://saahil.io)🅿️</h4>
+    <h2 href="https://saahil.io">Parking Lot 🅿️</h2>
   </a>
 
-<h3 align="center">A simple web server TODO list</h3>
+### A simple web server TODO list
+### Try it out now at [Saahil.io](https://saahil.io)
 
   <p align="center">
     <a href="https://github.com/SaahilParikh/parking-lot"><strong>Explore the docs »</strong></a>
