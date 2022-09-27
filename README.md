@@ -30,11 +30,11 @@
 <br />
 <div align="center">
   <a href="https://github.com/SaahilParikh/parking-lot">
-    <h2 href="https://saahil.io">🅿️</h2>
+    <h2 href="https://saahil.io">Parking Lot</h2>
+    <h3 align-"center" href="https://saahil.io">Try it out at [Saahil.io](https://saahil.io)🅿️</h4>
   </a>
 
 <h3 align="center">A simple web server TODO list</h3>
- <h4 align-"center" href="https://saahil.io">Saahil.io</h4>
 
   <p align="center">
     <a href="https://github.com/SaahilParikh/parking-lot"><strong>Explore the docs »</strong></a>
@@ -79,8 +79,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Parking-lot is a small light weight TODO list written with AWS, Terraform, and J.
 
