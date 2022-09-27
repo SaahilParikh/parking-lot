@@ -34,6 +34,7 @@
   </a>
 
 <h3 align="center">A simple web server TODO list</h3>
+ <h4 align-"center" href="https://saahil.io">Saahil.io</h4>
 
   <p align="center">
     <a href="https://github.com/SaahilParikh/parking-lot"><strong>Explore the docs »</strong></a>
@@ -81,7 +82,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-parking-lot is a small light weight TODO list written with AWS, Terraform, and JS.
+Parking-lot is a small light weight TODO list written with AWS, Terraform, and J.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -140,7 +141,7 @@ _For more examples, please refer to the [Documentation](https://github.com/Saahi
 <!-- ROADMAP -->
 ## Roadmap
 
-- [] Build Roadmap
+- [ ] Build Roadmap
 
 See the [open issues](https://github.com/SaahilParikh/parking-lot/issues) for a full list of proposed features (and known issues).
 
