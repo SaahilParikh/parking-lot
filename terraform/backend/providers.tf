@@ -10,4 +10,10 @@ terraform {
 # Configure the AWS Provider
 provider "aws" {
   region = "us-west-2"
+  default_tags {
+    tags = {
+      Project = "parking-lot"
+      Parking = "parking-lot backend"
+    }
+  }
 }

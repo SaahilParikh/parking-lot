@@ -83,35 +83,45 @@ resource "aws_lambda_function" "parking_lot_function" {
 }
 
 resource "aws_apigatewayv2_api" "parking_lot_api" {
-  name          = "parking-lot-api"
-  protocol_type = "HTTP"
+  name                         = "parking-lot-api"
+  protocol_type                = "HTTP"
+  disable_execute_api_endpoint = true
+
+  cors_configuration {
+    allow_credentials = false
+    allow_headers     = ["content-type"]
+    allow_methods     = ["*"]
+    allow_origins     = [format("https://%s", var.domain_name)]
+    expose_headers    = []
+    max_age           = 100
+  }
 }
 
-resource aws_apigatewayv2_stage api_gw_stage {
+resource "aws_apigatewayv2_stage" "api_gw_stage" {
 
-  api_id = aws_apigatewayv2_api.parking_lot_api.id
-  name = "$default"
+  api_id      = aws_apigatewayv2_api.parking_lot_api.id
+  name        = "$default"
   auto_deploy = true
 
 }
 
-resource aws_apigatewayv2_route api_routes {
+resource "aws_apigatewayv2_route" "api_routes" {
   for_each = toset(var.routes)
-  api_id    = aws_apigatewayv2_api.parking_lot_api.id
+  api_id   = aws_apigatewayv2_api.parking_lot_api.id
 
   route_key = each.key
-  target = "integrations/${aws_apigatewayv2_integration.parking_lot_api_integration.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.parking_lot_api_integration.id}"
 }
 
-resource aws_apigatewayv2_integration parking_lot_api_integration {
+resource "aws_apigatewayv2_integration" "parking_lot_api_integration" {
   api_id           = aws_apigatewayv2_api.parking_lot_api.id
   integration_type = "AWS_PROXY"
 
   payload_format_version = "2.0"
 
-  description               = "API integration for parking lot routes"
-  integration_method        = "POST"
-  integration_uri           = aws_lambda_function.parking_lot_function.invoke_arn
+  description        = "API integration for parking lot routes"
+  integration_method = "POST"
+  integration_uri    = aws_lambda_function.parking_lot_function.invoke_arn
 }
 
 resource "aws_lambda_permission" "allow_api" {
@@ -121,6 +131,50 @@ resource "aws_lambda_permission" "allow_api" {
   principal     = "apigateway.amazonaws.com"
 }
 
-output parking_lot_baseurl {
-  value = aws_apigatewayv2_stage.api_gw_stage.invoke_url
+resource "aws_acm_certificate" "saahil_io_certificate" {
+  domain_name = var.domain_name
+  subject_alternative_names = [
+    var.api_domain_name,
+    var.domain_name,
+    var.www_domain_name,
+  ]
+  validation_method = "DNS"
+
+  options {
+    certificate_transparency_logging_preference = "ENABLED"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+resource "aws_apigatewayv2_domain_name" "api_saahil_io_api_gateway_domain_name" {
+  domain_name = var.api_domain_name
+  domain_name_configuration {
+    certificate_arn = aws_acm_certificate.saahil_io_certificate.arn
+    endpoint_type   = "REGIONAL"
+    security_policy = "TLS_1_2"
+  }
+}
+
+resource "aws_route53_zone" "saahil_io_hosted_zone" {
+  comment = "HostedZone created by Route53 Registrar for parking-lot"
+  name    = var.domain_name
+}
+
+resource "aws_route53_record" "saahil_io_api_gw_record" {
+  name    = var.api_domain_name
+  type    = "A"
+  zone_id = aws_route53_zone.saahil_io_hosted_zone.zone_id
+  alias {
+    evaluate_target_health = true
+    name                   = aws_apigatewayv2_domain_name.api_saahil_io_api_gateway_domain_name.domain_name_configuration[0].target_domain_name
+    zone_id                = aws_apigatewayv2_domain_name.api_saahil_io_api_gateway_domain_name.domain_name_configuration[0].hosted_zone_id
+  }
+}
+
+resource "aws_apigatewayv2_api_mapping" "api_saahil_io_gw_mapping" {
+  api_id      = aws_apigatewayv2_api.parking_lot_api.id
+  domain_name = aws_apigatewayv2_domain_name.api_saahil_io_api_gateway_domain_name.id
+  stage       = aws_apigatewayv2_stage.api_gw_stage.id
 }

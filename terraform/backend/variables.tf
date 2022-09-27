@@ -13,3 +13,11 @@ variable "function_code_output_path" {
 variable "routes" {
   default = ["GET /items/{id}", "PUT /items", "DELETE /items/{id}", "GET /items"]
 }
+
+variable "domain_name" {
+  default = "saahil.io"
+}
+
+variable "api_domain_name" {
+  default = "api.saahil.io"
+}
