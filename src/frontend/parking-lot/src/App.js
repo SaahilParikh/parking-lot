@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import AddTaskForm from './components/AddTaskForm.jsx';
 import ToDo from './components/ToDo.jsx';
 
@@ -8,20 +8,25 @@ import './App.css';
 
 function App() {
 
+  const endpoint = 'https://api.saahil.io/items';
+
   // Tasks (ToDo List) State
   const [toDo, setToDo] = useState([]);
 
+  const refreshTasks = async () => {
+    const response = await fetch(endpoint);
+    const data = await response.json();
+    console.log(data);
+    let items = data["Items"];
+    setToDo(items);
+  }
+  
+  useEffect(() => {
+    refreshTasks();
+  }, []); 
+
   // Temp State
   const [newTask, setNewTask] = useState('');
-
-  const endpoint = 'https://m1mvm39v0g.execute-api.us-west-2.amazonaws.com/items/';
-
-  // refresh tasks
-  const pollTasks = () => {
-    fetch(endpoint)
-    .then((response) => response.json())
-    .then((data) => console.log(data));
-  }
 
   // Add task 
   ///////////////////////////
@@ -30,15 +35,15 @@ function App() {
       let newEntry = { id: newTask }
       fetch(endpoint, {
         method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(newEntry) // body data type must match "Content-Type" header
       })
       .then(response => response.json())
       .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
       .catch(err => console.log(err)) // Do something with the error;
-   
       setToDo([...toDo, newEntry])
       setNewTask('');
     }
@@ -47,8 +52,10 @@ function App() {
   // Delete task 
   ///////////////////////////
   const deleteTask = (id) => {
-    fetch(endpoint + id, {
+    console.log(`${endpoint}/${id}`);
+    fetch(`${endpoint}/${id}`, {
       method: 'DELETE',
+      mode: 'cors'
     })
     .then(res => res.text()) // or res.json()
     .then(res => console.log(res))
@@ -57,12 +64,13 @@ function App() {
   }
 
   return (
+    
     <div className="container App">
 
     <br /><br />
-    <h2>Parking Lot</h2>
+    <h2>Parking Lot </h2>
     <br /><br />
-
+    
     {
       <AddTaskForm 
         newTask={newTask}
@@ -78,7 +86,8 @@ function App() {
     <ToDo
       toDo={toDo}
       deleteTask={deleteTask}
-    />  
+    /> 
+
     <br /><br />
     </div>
   );
