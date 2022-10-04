@@ -68,7 +68,8 @@ function App() {
     <div className="container App">
 
     <br /><br />
-    <h2>Parking Lot </h2>
+    <h2>Parking Lot</h2>
+    <small>Hey baby could you make sure to not add tasks with a "/" in them? It looks like there's a bug with deleting those entries.</small>
     <br /><br />
     
     {
@@ -87,6 +88,10 @@ function App() {
       toDo={toDo}
       deleteTask={deleteTask}
     /> 
+
+    <br /><br />
+
+    <p>I ❤️ Rachel</p>
 
     <br /><br />
     </div>
