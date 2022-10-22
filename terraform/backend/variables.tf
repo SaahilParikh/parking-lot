@@ -11,7 +11,7 @@ variable "function_code_output_path" {
 }
 
 variable "routes" {
-  default = ["GET /items/{id}", "PUT /items", "DELETE /items/{id}", "GET /items"]
+  default = ["PUT /v1/items", "DELETE /v1/items/{id}", "GET /v1/items"]
 }
 
 variable "domain_name" {
