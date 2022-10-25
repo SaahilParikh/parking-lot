@@ -30,16 +30,16 @@
 <br />
 <div align="center">
   <a href="https://github.com/SaahilParikh/parking-lot">
-    <h2 href="https://saahil.io">Parking Lot 🅿️</h2>
+    <h2 href="https://todolot.com">Parking Lot 🅿️</h2>
   </a>
 
 ### A simple web server TODO list
-### Try it out now at [Saahil.io](https://saahil.io)
+### Try it out now at [todolot.com](https://todolot.com)
 
   <p align="center">
     <a href="https://github.com/SaahilParikh/parking-lot"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://saahil.io">View Demo</a>
+    <a href="https://todolot.com">View Demo</a>
     ·
     <a href="https://github.com/SaahilParikh/parking-lot/issues">Report Bug</a>
     ·
@@ -128,7 +128,7 @@ yes
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Currently the parking-lot as a simple TODO list. You can access [parking-lot](https://saahil.io) with a browser from anywhere with internet connection!
+Currently the parking-lot as a simple TODO list. You can access [parking-lot](https://todolot.com) with a browser from anywhere with internet connection!
 
 _For more examples, please refer to the [Documentation](https://github.com/SaahilParikh/parking-lot)_
 
