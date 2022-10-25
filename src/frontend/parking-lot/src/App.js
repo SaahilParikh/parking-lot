@@ -90,8 +90,7 @@ function App() {
 
     <br /><br />
 
-    <p>Thinking about you ❤️</p>
-    <p>Development being done on <a href='http://rachelwoody.com'>MasterOfOptics.com</a></p>
+    <p>Development being done on <a href='https://tinkan.link'>MasterOfOptics.com</a></p>
 
     <br /><br />
     </div>
