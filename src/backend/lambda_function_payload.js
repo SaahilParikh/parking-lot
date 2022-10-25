@@ -8,37 +8,29 @@ exports.handler = async (event, context) => {
 	"Content-Type": "application/json"
   };
 
+	tableName = "parking-lot-table";
+
   try {
 	switch (event.routeKey) {
-  	case "DELETE /items/{id}":
+  	case "DELETE /v1/items/{id}":
     	await dynamo
       	.delete({
-        	TableName: "parking-lot-items",
+        	TableName: tableName,
         	Key: {
-          	id: event.pathParameters.id
+          	id: atob(event.pathParameters.id)
         	}
       	})
       	.promise();
     	body = `Deleted item ${event.pathParameters.id}`;
     	break;
-  	case "GET /items/{id}":
-    	body = await dynamo
-      	.get({
-        	TableName: "parking-lot-items",
-        	Key: {
-          	id: event.pathParameters.id
-        	}
-      	})
-      	.promise();
+  	case "GET /v1/items":
+    	body = await dynamo.scan({ TableName: tableName }).promise();
     	break;
-  	case "GET /items":
-    	body = await dynamo.scan({ TableName: "parking-lot-items" }).promise();
-    	break;
-  	case "PUT /items":
+  	case "PUT /v1/items":
     	let requestJSON = JSON.parse(event.body);
     	await dynamo
       	.put({
-        	TableName: "parking-lot-items",
+        	TableName: tableName,
         	Item: {
           	id: requestJSON.id
         	}

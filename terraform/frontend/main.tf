@@ -149,7 +149,7 @@ resource "aws_cloudfront_cache_policy" "root_bucket_cloudfront_cache_policy" {
     default_ttl = 86400
     max_ttl     = 31536000
     min_ttl     = 1
-    name        = "Managed-CachingOptimized"
+    name        = "Managed-CachingDisabled"
 
     parameters_in_cache_key_and_forwarded_to_origin {
         enable_accept_encoding_brotli = true

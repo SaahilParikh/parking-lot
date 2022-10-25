@@ -8,7 +8,7 @@ import './App.css';
 
 function App() {
 
-  const endpoint = 'https://api.saahil.io/items';
+  const endpoint = 'https://api.todolot.com/v1/items';
 
   // Tasks (ToDo List) State
   const [toDo, setToDo] = useState([]);
@@ -52,8 +52,8 @@ function App() {
   // Delete task 
   ///////////////////////////
   const deleteTask = (id) => {
-    console.log(`${endpoint}/${id}`);
-    fetch(`${endpoint}/${id}`, {
+    console.log(`${endpoint}/${btoa(id)}`);
+    fetch(`${endpoint}/${btoa(id)}`, {
       method: 'DELETE',
       mode: 'cors'
     })
@@ -69,7 +69,6 @@ function App() {
 
     <br /><br />
     <h2>Parking Lot</h2>
-    <small>Hey baby could you make sure to not add tasks with a "/" in them? It looks like there's a bug with deleting those entries.</small>
     <br /><br />
     
     {
@@ -91,7 +90,8 @@ function App() {
 
     <br /><br />
 
-    <p>I ❤️ Rachel</p>
+    <p>Thinking about you ❤️</p>
+    <p>Development being done on <a href='http://rachelwoody.com'>MasterOfOptics.com</a></p>
 
     <br /><br />
     </div>
